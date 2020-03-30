@@ -537,14 +537,10 @@
 <br>
 <br><strong>Até breve! &nbsp;&nbsp;</strong></p>
                 </div>
-                
             </div>
         </div>
     </div>
-
 </section>
-
-
   <script src="assets/web/assets/jquery/jquery.min.js"></script>
   <script src="assets/popper/popper.min.js"></script>
   <script src="assets/tether/tether.min.js"></script>
@@ -560,85 +556,5 @@
   <script src="assets/dropdown/js/script.min.js"></script>
   <script src="assets/theme/js/script.js"></script>
   <script src="assets/slidervideo/script.js"></script>
-  <script type="text/javascript">
-			// Inicio das funções do Scorm Cloud          
-			var scorm = pipwerks.SCORM;
-			scorm.version = "1.2";
-			var sco = true;
-			window.contVid = null;
-			isLMS = true;
-	
-			var data = {
-				lessonLocation: "1",
-				lessonStatus: "incomplete",
-				scoreRaw: "0",
-				suspendData: ""
-			}
-	
-			this.iniciar = function () {
-				if (sco) {
-					isLMS = pipwerks.SCORM.init() ? true : false;
-					if (isLMS) {
-						sincronizar();
-					}
-					// if(getLocation() >= 2){
-					//     setTimeout(function(){
-					//        player.currentTime = Math.round(getLocation());
-					//     },1000);
-					// }
-				}
-			}
-	
-			function sincronizar() {
-				pipwerks.SCORM.set("cmi.core.score.min", "0");
-				pipwerks.SCORM.set("cmi.core.score.max", "100");
-				pipwerks.SCORM.set("cmi.core.score.raw", data.scoreRaw);
-				pipwerks.SCORM.set("cmi.core.lesson_location", data.lessonLocation);
-				pipwerks.SCORM.set("cmi.core.lesson_status", data.lessonStatus);
-			}
-	
-			function setLocation(loc) {
-				loc = Math.round(loc);
-				data.lessonLocation = loc.toString();
-				sincronizar();
-				console.log("chamou setLocation" + loc);
-			}
-	
-			function setScore(perc) {
-				perc = Math.round(perc);
-				data.scoreRaw = perc.toString();
-				if (perc >= 99) {
-					data.lessonStatus = "completed";
-					finishContent();
-				}
-	
-				sincronizar();
-				console.log("chamou setScorm" + perc);
-			}
-			function getLocation() {
-				data.lessonLocation = pipwerks.SCORM.get("cmi.core.lesson_location");
-				return data.lessonLocation;
-			}
-			function finishContent() {
-				if (location.hash != undefined && location.hash != "") {
-					if (location.hash == "#finished") return false;
-					else window.location.hash = "#finished"
-				} else {
-					window.location.href += "#finished"
-				}
-				if (typeof Finalizer != 'undefined') {
-					Finalizer.finished()
-				}
-				return true
-			}
-	
-			this.iniciar();
-	
-	
-			setScore("100");
-	
-	//FIM Scorm cloud
-</script> 
-
 </body>
 </html>
